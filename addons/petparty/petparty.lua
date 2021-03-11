@@ -3,7 +3,7 @@ addon.name      = 'petparty';
 addon.author    = 'arosecra';
 addon.version   = '1.0';
 addon.desc      = 'Displays the health of all pets in the current party';
-addon.link      = 'tbd';
+addon.link      = 'https://github.com/arosecra/ffxi-ashita4-petparty';
 
 local imgui = require('imgui');
 local common = require('common');
