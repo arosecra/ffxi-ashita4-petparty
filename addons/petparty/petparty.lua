@@ -8,6 +8,7 @@ addon.link      = 'https://github.com/arosecra/ffxi-ashita4-petparty';
 local imgui = require('imgui');
 local common = require('common');
 local jobs = require('res/jobs');
+local helper = require('helper');
 
 local petparty_window = {
     is_open                 = { true }
@@ -51,9 +52,11 @@ ashita.events.register('d3d_present', 'petparty_present_cb', function ()
 	end
 	
 	if pet_job_count > 0 then
-	
-		if imgui.Begin(addon.name, petparty_window.is_open) then
-			if imgui.BeginTable(addon.name, 3, ImGuiTableFlags_SizingFixedFit, 0, 0) then
+		local windowStyleFlags = helper.gui_style_table_to_var("imguistyle", addon.name, "window.style");
+		local tableStyleFlags = helper.gui_style_table_to_var("imguistyle", addon.name, "table.style");
+		helper.imgui_set_window(addon.name);
+		if imgui.Begin(addon.name, petparty_window.is_open, windowStyleFlags) then
+			if imgui.BeginTable(addon.name, 3, tableStyleFlags, 0, 0) then
 
 				for i=0,5 do
 					local name = party:GetMemberName(i);
