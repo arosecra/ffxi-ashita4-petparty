@@ -7,8 +7,9 @@ addon.link      = 'https://github.com/arosecra/ffxi-ashita4-petparty';
 
 local imgui = require('imgui');
 local common = require('common');
-local jobs = require('res/jobs');
-local helper = require('helper');
+local jobs = require('arosecra/jobs');
+local libs2imgui = require('arosecra/imgui');
+local libs2config = require('arosecra/config');
 
 local petparty_window = {
     is_open                 = { true }
@@ -52,9 +53,9 @@ ashita.events.register('d3d_present', 'petparty_present_cb', function ()
 	end
 	
 	if pet_job_count > 0 then
-		local windowStyleFlags = helper.gui_style_table_to_var("imguistyle", addon.name, "window.style");
-		local tableStyleFlags = helper.gui_style_table_to_var("imguistyle", addon.name, "table.style");
-		helper.imgui_set_window(addon.name);
+		local windowStyleFlags = libs2imgui.gui_style_table_to_var("imguistyle", addon.name, "window.style");
+		local tableStyleFlags = libs2imgui.gui_style_table_to_var("imguistyle", addon.name, "table.style");
+		libs2imgui.imgui_set_window(addon.name);
 		if imgui.Begin(addon.name, petparty_window.is_open, windowStyleFlags) then
 			if imgui.BeginTable(addon.name, 3, tableStyleFlags, 0, 0) then
 
