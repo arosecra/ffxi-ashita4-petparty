@@ -60,7 +60,7 @@ ashita.events.register('d3d_present', 'petparty_present_cb', function ()
 		local tableStyleFlags = libs2imgui.gui_style_table_to_var("imguistyle", addon.name, "table.style");
 		libs2imgui.imgui_set_window(addon.name);
 		if imgui.Begin(addon.name, petparty_window.is_open, windowStyleFlags) then
-			if imgui.BeginTable('t3', 3, tableStyleFlags, 0, 0) then
+			if imgui.BeginTable('t4', 3, tableStyleFlags, 0, 0) then
 
 				for i=0,5 do
 					local name = party:GetMemberName(i);
@@ -82,7 +82,7 @@ ashita.events.register('d3d_present', 'petparty_present_cb', function ()
 								local petTargetIndex = entity.PetTargetIndex;
 								if petTargetIndex ~= 0 then
 									local petEntity = GetEntity(petTargetIndex);
-									if petEntity ~= nil then
+									if petEntity ~= nil and petEntity.Name ~= nil then
 										imgui.Text(petEntity.Name);
 										imgui.TableNextColumn();
 										local percentage = petEntity.HPPercent / 100
