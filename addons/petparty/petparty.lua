@@ -7,7 +7,6 @@ addon.link      = 'https://github.com/arosecra/ffxi-ashita4-petparty';
 
 local imgui = require('imgui');
 local common = require('common');
-local jobs = require('org_github_arosecra/jobs');
 local libs2imgui = require('org_github_arosecra/imgui');
 local libs2config = require('org_github_arosecra/config');
 local mechanics = require('org_github_arosecra/mechanics');
@@ -45,12 +44,12 @@ ashita.events.register('d3d_present', 'petparty_present_cb', function ()
 	
 	local pet_job_count = 0;
 	for i=0,5 do
-		local mainjob = jobs[party:GetMemberMainJob(i)]
-		if mainjob == "Beastmaster" or
-		   mainjob == "Puppetmaster" or
-		   mainjob == "Summoner" or
-		   mainjob == "Geomancer" or 
-		   mainjob == "Dragoon" then
+		local mainjob = AshitaCore:GetResourceManager():GetString("jobs.names_abbr", party:GetMemberMainJob(i));
+		if mainjob == "BST" or
+		   mainjob == "PUP" or
+		   mainjob == "SMN" or
+		   mainjob == "GEO" or 
+		   mainjob == "DRG" then
 		   pet_job_count = pet_job_count + 1;
 		end
 	end
@@ -65,13 +64,13 @@ ashita.events.register('d3d_present', 'petparty_present_cb', function ()
 				for i=0,5 do
 					local name = party:GetMemberName(i);
 					local entityId = party:GetMemberTargetIndex(i);
-					local mainjob = jobs[party:GetMemberMainJob(i)];
+					local mainjob = AshitaCore:GetResourceManager():GetString("jobs.names_abbr", party:GetMemberMainJob(i));
 					
-					if mainjob == "Beastmaster" or
-					   mainjob == "Puppetmaster" or
-					   mainjob == "Summoner" or
-					   mainjob == "Geomancer" or 
-					   mainjob == "Dragoon" then
+					if mainjob == "BST" or
+					   mainjob == "PUP" or
+					   mainjob == "SMN" or
+					   mainjob == "GEO" or 
+					   mainjob == "DRG" then
 						imgui.TableNextColumn();
 						imgui.Text(name);
 						imgui.TableNextColumn();
