@@ -10,6 +10,7 @@ local common = require('common');
 local libs2imgui = require('org_github_arosecra/imgui');
 local libs2config = require('org_github_arosecra/config');
 local mechanics = require('org_github_arosecra/mechanics');
+local char_jobs_extra = require('org_github_arosecra/packets/char_jobs_extra')
 
 local petparty_window = {
     is_open                 = { true }
@@ -22,6 +23,23 @@ local runtime_config = {
 
 ashita.events.register('load', 'petparty_load_cb', function ()
     print("[petparty] 'load' event was called.");
+end);
+
+
+ashita.events.register('packet_in', 'gambits_in_callback1', function (e)
+    if (e.id == 0x44) then
+		local pkt = char_jobs_extra.parse(e.data)
+		local att = ''
+		if pkt.auto.name ~= nil then
+			for i = 1, 12 do
+				att = att .. ' ' .. pkt.auto.slots[i]
+			end
+			print(att)
+		end
+		--runtime_config.party_status_effects = status_effect_packet.parse(e.data)
+		--print('parsed 0x76')
+    end
+	
 end);
 
 ashita.events.register('command', 'petparty_command_cb', function (e)
