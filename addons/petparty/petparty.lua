@@ -34,7 +34,7 @@ ashita.events.register('packet_in', 'gambits_in_callback1', function (e)
 			for i = 1, 12 do
 				att = att .. ' ' .. pkt.auto.slots[i]
 			end
-			print(att)
+			-- print(att)
 		end
 		--runtime_config.party_status_effects = status_effect_packet.parse(e.data)
 		--print('parsed 0x76')
